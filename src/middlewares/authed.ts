@@ -5,16 +5,20 @@ import { auth } from "@/lib/auth";
 
 /**
  * Middleware to check if the user is authenticated.
- * If the user is not authenticated, redirect them to the sign-in page.
- * If the user is authenticated, continue to the next middleware.
+ * If the user is authenticated, redirect to dashboard or the redirect query param.
+ * Usable for sign-in and sign-up pages
  */
-export const authMiddleware = createMiddleware().server(
-	async ({ next, pathname }) => {
+export const authedMiddleware = createMiddleware().server(
+	async ({ next, request }) => {
 		const headers = getRequestHeaders();
 		const session = await auth.api.getSession({ headers });
 
-		if (!session) {
-			throw redirect({ to: "/sign-in", search: { redirect: pathname } });
+		const search = new URL(request.url);
+
+		if (session) {
+			throw redirect({
+				to: search.searchParams.get("redirect") || "/dashboard",
+			});
 		}
 
 		return await next();

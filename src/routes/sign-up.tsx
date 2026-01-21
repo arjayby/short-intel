@@ -1,14 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import z from "zod";
 import { ColorBends } from "@/components/color-bends";
-import { SignInForm } from "@/components/sign-in-form";
+import { SignUpForm } from "@/components/sign-up-form";
 import { authedMiddleware } from "@/middlewares/authed";
 
-export const Route = createFileRoute("/sign-in")({
+export const Route = createFileRoute("/sign-up")({
 	component: RouteComponent,
-	validateSearch: z.object({
-		redirect: z.string().optional(),
-	}),
 	server: {
 		middleware: [authedMiddleware],
 	},
@@ -35,7 +31,7 @@ function RouteComponent() {
 				</div>
 				<div className="flex flex-1 items-center justify-center">
 					<div className="w-full max-w-xs">
-						<SignInForm />
+						<SignUpForm />
 					</div>
 				</div>
 			</div>
