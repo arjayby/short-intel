@@ -1,5 +1,6 @@
 import { useForm } from "@tanstack/react-form-start";
 import { Link, useNavigate, useSearch } from "@tanstack/react-router";
+import { useState } from "react";
 import { toast } from "sonner";
 import z from "zod";
 import { Button } from "@/components/ui/button";
@@ -26,6 +27,7 @@ export function SignInForm({
 }: React.ComponentProps<"form">) {
 	const navigate = useNavigate();
 	const search = useSearch({ from: "/sign-in" });
+	const [isSigningInToGoogle, setIsSigningInToGoogle] = useState(false);
 
 	const form = useForm({
 		defaultValues: {
@@ -56,6 +58,15 @@ export function SignInForm({
 			);
 		},
 	});
+
+	async function handleGoogleSignIn() {
+		setIsSigningInToGoogle(true);
+		await authClient.signIn.social({
+			provider: "google",
+			callbackURL: search.redirect || "/dashboard",
+		});
+		setIsSigningInToGoogle(false);
+	}
 
 	return (
 		// biome-ignore lint/correctness/useUniqueElementIds: <explanation>
@@ -129,7 +140,12 @@ export function SignInForm({
 				</form.Subscribe>
 				<FieldSeparator>Or continue with</FieldSeparator>
 				<Field>
-					<Button variant="outline" type="button">
+					<Button
+						variant="outline"
+						type="button"
+						onClick={handleGoogleSignIn}
+						loading={isSigningInToGoogle}
+					>
 						{/** biome-ignore lint/a11y/noSvgWithoutTitle: <explanation> */}
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
