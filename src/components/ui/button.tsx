@@ -71,7 +71,7 @@ function Button({
 		>
 			{loading && (
 				<Loader2Icon
-					className={cn("text-muted absolute animate-spin", "loading")}
+					className={cn("text-foreground absolute animate-spin", "loading")}
 				/>
 			)}
 			{children}
