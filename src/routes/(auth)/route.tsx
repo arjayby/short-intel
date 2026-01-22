@@ -1,10 +1,9 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, Outlet } from "@tanstack/react-router";
 import z from "zod";
 import { ColorBends } from "@/components/color-bends";
-import { SignUpForm } from "@/components/sign-up-form";
 import { authedMiddleware } from "@/middlewares/authed";
 
-export const Route = createFileRoute("/sign-up")({
+export const Route = createFileRoute("/(auth)")({
 	component: RouteComponent,
 	validateSearch: z.object({
 		redirect: z.string().optional(),
@@ -35,7 +34,7 @@ function RouteComponent() {
 				</div>
 				<div className="flex flex-1 items-center justify-center">
 					<div className="w-full max-w-xs">
-						<SignUpForm />
+						<Outlet />
 					</div>
 				</div>
 			</div>

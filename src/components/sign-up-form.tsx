@@ -26,7 +26,7 @@ export function SignUpForm({
 	...props
 }: React.ComponentProps<"form">) {
 	const navigate = useNavigate();
-	const search = useSearch({ from: "/sign-up" });
+	const search = useSearch({ from: "/(auth)/sign-up" });
 	const [isSigningUpToGoogle, setIsSigningUpToGoogle] = useState(false);
 
 	const form = useForm({

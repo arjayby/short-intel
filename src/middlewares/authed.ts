@@ -7,6 +7,8 @@ import { auth } from "@/lib/auth";
  * Middleware to check if the user is authenticated.
  * If the user is authenticated, redirect to dashboard or the redirect query param.
  * Usable for sign-in and sign-up pages
+ *
+ * Note: This middleware should be used on (auth) routes.
  */
 export const authedMiddleware = createMiddleware().server(
 	async ({ next, request }) => {

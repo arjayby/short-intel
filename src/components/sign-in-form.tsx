@@ -26,7 +26,7 @@ export function SignInForm({
 	...props
 }: React.ComponentProps<"form">) {
 	const navigate = useNavigate();
-	const search = useSearch({ from: "/sign-in" });
+	const search = useSearch({ from: "/(auth)/sign-in" });
 	const [isSigningInToGoogle, setIsSigningInToGoogle] = useState(false);
 
 	const form = useForm({

@@ -2,13 +2,9 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { authClient } from "@/lib/auth-client";
-import { authMiddleware } from "@/middlewares/auth";
 
-export const Route = createFileRoute("/_authenticated/dashboard/")({
+export const Route = createFileRoute("/(protected)/dashboard")({
 	component: RouteComponent,
-	server: {
-		middleware: [authMiddleware],
-	},
 });
 
 function RouteComponent() {
