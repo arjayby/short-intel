@@ -47,9 +47,9 @@ export function SignInForm({
 						toast.success(title, { description });
 						navigate({ to: search.redirect || "/dashboard" });
 					},
-					onError: (context) => {
-						toast.error("Sign in failed", {
-							description: context.error.message,
+					onError: ({ error }) => {
+						toast.error("Login failed", {
+							description: error.message,
 						});
 					},
 				},
@@ -118,11 +118,15 @@ export function SignInForm({
 						);
 					}}
 				</form.Field>
-				<Field>
-					<Button type="submit" loading={form.state.isSubmitting}>
-						Login
-					</Button>
-				</Field>
+				<form.Subscribe>
+					{({ isSubmitting }) => {
+						return (
+							<Button type="submit" loading={isSubmitting}>
+								Login
+							</Button>
+						);
+					}}
+				</form.Subscribe>
 				<FieldSeparator>Or continue with</FieldSeparator>
 				<Field>
 					<Button variant="outline" type="button">

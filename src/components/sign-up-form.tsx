@@ -25,7 +25,7 @@ export function SignUpForm({
 	...props
 }: React.ComponentProps<"form">) {
 	const navigate = useNavigate();
-	const search = useSearch({ from: "/sign-in" });
+	const search = useSearch({ from: "/sign-up" });
 
 	const form = useForm({
 		defaultValues: {
@@ -48,9 +48,9 @@ export function SignUpForm({
 						toast.success(title, { description });
 						navigate({ to: search.redirect || "/dashboard" });
 					},
-					onError: (context) => {
+					onError: ({ error }) => {
 						toast.error("Sign up failed", {
-							description: context.error.message,
+							description: error.message,
 						});
 					},
 				},
@@ -119,9 +119,15 @@ export function SignUpForm({
 						);
 					}}
 				</form.Field>
-				<Field>
-					<Button type="submit">Sign Up</Button>
-				</Field>
+				<form.Subscribe>
+					{({ isSubmitting }) => {
+						return (
+							<Button type="submit" loading={isSubmitting}>
+								Sign Up
+							</Button>
+						);
+					}}
+				</form.Subscribe>
 				<FieldSeparator>Or continue with</FieldSeparator>
 				<Field>
 					<Button variant="outline" type="button">

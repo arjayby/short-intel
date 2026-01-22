@@ -1,10 +1,14 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import z from "zod";
 import { ColorBends } from "@/components/color-bends";
 import { SignUpForm } from "@/components/sign-up-form";
 import { authedMiddleware } from "@/middlewares/authed";
 
 export const Route = createFileRoute("/sign-up")({
 	component: RouteComponent,
+	validateSearch: z.object({
+		redirect: z.string().optional(),
+	}),
 	server: {
 		middleware: [authedMiddleware],
 	},
