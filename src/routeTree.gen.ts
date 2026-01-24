@@ -13,7 +13,13 @@ import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
 import { Route as protectedRouteRouteImport } from './routes/(protected)/route'
 import { Route as authRouteRouteImport } from './routes/(auth)/route'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as protectedDashboardRouteImport } from './routes/(protected)/dashboard'
+import { Route as protectedViralShortsRouteImport } from './routes/(protected)/viral-shorts'
+import { Route as protectedSavedRouteImport } from './routes/(protected)/saved'
+import { Route as protectedRisingChannelsRouteImport } from './routes/(protected)/rising-channels'
+import { Route as protectedOverviewRouteImport } from './routes/(protected)/overview'
+import { Route as protectedMonitorRouteImport } from './routes/(protected)/monitor'
+import { Route as protectedDiscoverRouteImport } from './routes/(protected)/discover'
+import { Route as protectedAlertsRouteImport } from './routes/(protected)/alerts'
 import { Route as authSignUpRouteImport } from './routes/(auth)/sign-up'
 import { Route as authSignInRouteImport } from './routes/(auth)/sign-in'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
@@ -36,9 +42,39 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const protectedDashboardRoute = protectedDashboardRouteImport.update({
-  id: '/dashboard',
-  path: '/dashboard',
+const protectedViralShortsRoute = protectedViralShortsRouteImport.update({
+  id: '/viral-shorts',
+  path: '/viral-shorts',
+  getParentRoute: () => protectedRouteRoute,
+} as any)
+const protectedSavedRoute = protectedSavedRouteImport.update({
+  id: '/saved',
+  path: '/saved',
+  getParentRoute: () => protectedRouteRoute,
+} as any)
+const protectedRisingChannelsRoute = protectedRisingChannelsRouteImport.update({
+  id: '/rising-channels',
+  path: '/rising-channels',
+  getParentRoute: () => protectedRouteRoute,
+} as any)
+const protectedOverviewRoute = protectedOverviewRouteImport.update({
+  id: '/overview',
+  path: '/overview',
+  getParentRoute: () => protectedRouteRoute,
+} as any)
+const protectedMonitorRoute = protectedMonitorRouteImport.update({
+  id: '/monitor',
+  path: '/monitor',
+  getParentRoute: () => protectedRouteRoute,
+} as any)
+const protectedDiscoverRoute = protectedDiscoverRouteImport.update({
+  id: '/discover',
+  path: '/discover',
+  getParentRoute: () => protectedRouteRoute,
+} as any)
+const protectedAlertsRoute = protectedAlertsRouteImport.update({
+  id: '/alerts',
+  path: '/alerts',
   getParentRoute: () => protectedRouteRoute,
 } as any)
 const authSignUpRoute = authSignUpRouteImport.update({
@@ -62,7 +98,13 @@ export interface FileRoutesByFullPath {
   '/forgot-password': typeof ForgotPasswordRoute
   '/sign-in': typeof authSignInRoute
   '/sign-up': typeof authSignUpRoute
-  '/dashboard': typeof protectedDashboardRoute
+  '/alerts': typeof protectedAlertsRoute
+  '/discover': typeof protectedDiscoverRoute
+  '/monitor': typeof protectedMonitorRoute
+  '/overview': typeof protectedOverviewRoute
+  '/rising-channels': typeof protectedRisingChannelsRoute
+  '/saved': typeof protectedSavedRoute
+  '/viral-shorts': typeof protectedViralShortsRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
 }
 export interface FileRoutesByTo {
@@ -70,7 +112,13 @@ export interface FileRoutesByTo {
   '/forgot-password': typeof ForgotPasswordRoute
   '/sign-in': typeof authSignInRoute
   '/sign-up': typeof authSignUpRoute
-  '/dashboard': typeof protectedDashboardRoute
+  '/alerts': typeof protectedAlertsRoute
+  '/discover': typeof protectedDiscoverRoute
+  '/monitor': typeof protectedMonitorRoute
+  '/overview': typeof protectedOverviewRoute
+  '/rising-channels': typeof protectedRisingChannelsRoute
+  '/saved': typeof protectedSavedRoute
+  '/viral-shorts': typeof protectedViralShortsRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
 }
 export interface FileRoutesById {
@@ -81,7 +129,13 @@ export interface FileRoutesById {
   '/forgot-password': typeof ForgotPasswordRoute
   '/(auth)/sign-in': typeof authSignInRoute
   '/(auth)/sign-up': typeof authSignUpRoute
-  '/(protected)/dashboard': typeof protectedDashboardRoute
+  '/(protected)/alerts': typeof protectedAlertsRoute
+  '/(protected)/discover': typeof protectedDiscoverRoute
+  '/(protected)/monitor': typeof protectedMonitorRoute
+  '/(protected)/overview': typeof protectedOverviewRoute
+  '/(protected)/rising-channels': typeof protectedRisingChannelsRoute
+  '/(protected)/saved': typeof protectedSavedRoute
+  '/(protected)/viral-shorts': typeof protectedViralShortsRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
 }
 export interface FileRouteTypes {
@@ -91,7 +145,13 @@ export interface FileRouteTypes {
     | '/forgot-password'
     | '/sign-in'
     | '/sign-up'
-    | '/dashboard'
+    | '/alerts'
+    | '/discover'
+    | '/monitor'
+    | '/overview'
+    | '/rising-channels'
+    | '/saved'
+    | '/viral-shorts'
     | '/api/auth/$'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -99,7 +159,13 @@ export interface FileRouteTypes {
     | '/forgot-password'
     | '/sign-in'
     | '/sign-up'
-    | '/dashboard'
+    | '/alerts'
+    | '/discover'
+    | '/monitor'
+    | '/overview'
+    | '/rising-channels'
+    | '/saved'
+    | '/viral-shorts'
     | '/api/auth/$'
   id:
     | '__root__'
@@ -109,7 +175,13 @@ export interface FileRouteTypes {
     | '/forgot-password'
     | '/(auth)/sign-in'
     | '/(auth)/sign-up'
-    | '/(protected)/dashboard'
+    | '/(protected)/alerts'
+    | '/(protected)/discover'
+    | '/(protected)/monitor'
+    | '/(protected)/overview'
+    | '/(protected)/rising-channels'
+    | '/(protected)/saved'
+    | '/(protected)/viral-shorts'
     | '/api/auth/$'
   fileRoutesById: FileRoutesById
 }
@@ -151,11 +223,53 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/(protected)/dashboard': {
-      id: '/(protected)/dashboard'
-      path: '/dashboard'
-      fullPath: '/dashboard'
-      preLoaderRoute: typeof protectedDashboardRouteImport
+    '/(protected)/viral-shorts': {
+      id: '/(protected)/viral-shorts'
+      path: '/viral-shorts'
+      fullPath: '/viral-shorts'
+      preLoaderRoute: typeof protectedViralShortsRouteImport
+      parentRoute: typeof protectedRouteRoute
+    }
+    '/(protected)/saved': {
+      id: '/(protected)/saved'
+      path: '/saved'
+      fullPath: '/saved'
+      preLoaderRoute: typeof protectedSavedRouteImport
+      parentRoute: typeof protectedRouteRoute
+    }
+    '/(protected)/rising-channels': {
+      id: '/(protected)/rising-channels'
+      path: '/rising-channels'
+      fullPath: '/rising-channels'
+      preLoaderRoute: typeof protectedRisingChannelsRouteImport
+      parentRoute: typeof protectedRouteRoute
+    }
+    '/(protected)/overview': {
+      id: '/(protected)/overview'
+      path: '/overview'
+      fullPath: '/overview'
+      preLoaderRoute: typeof protectedOverviewRouteImport
+      parentRoute: typeof protectedRouteRoute
+    }
+    '/(protected)/monitor': {
+      id: '/(protected)/monitor'
+      path: '/monitor'
+      fullPath: '/monitor'
+      preLoaderRoute: typeof protectedMonitorRouteImport
+      parentRoute: typeof protectedRouteRoute
+    }
+    '/(protected)/discover': {
+      id: '/(protected)/discover'
+      path: '/discover'
+      fullPath: '/discover'
+      preLoaderRoute: typeof protectedDiscoverRouteImport
+      parentRoute: typeof protectedRouteRoute
+    }
+    '/(protected)/alerts': {
+      id: '/(protected)/alerts'
+      path: '/alerts'
+      fullPath: '/alerts'
+      preLoaderRoute: typeof protectedAlertsRouteImport
       parentRoute: typeof protectedRouteRoute
     }
     '/(auth)/sign-up': {
@@ -197,11 +311,23 @@ const authRouteRouteWithChildren = authRouteRoute._addFileChildren(
 )
 
 interface protectedRouteRouteChildren {
-  protectedDashboardRoute: typeof protectedDashboardRoute
+  protectedAlertsRoute: typeof protectedAlertsRoute
+  protectedDiscoverRoute: typeof protectedDiscoverRoute
+  protectedMonitorRoute: typeof protectedMonitorRoute
+  protectedOverviewRoute: typeof protectedOverviewRoute
+  protectedRisingChannelsRoute: typeof protectedRisingChannelsRoute
+  protectedSavedRoute: typeof protectedSavedRoute
+  protectedViralShortsRoute: typeof protectedViralShortsRoute
 }
 
 const protectedRouteRouteChildren: protectedRouteRouteChildren = {
-  protectedDashboardRoute: protectedDashboardRoute,
+  protectedAlertsRoute: protectedAlertsRoute,
+  protectedDiscoverRoute: protectedDiscoverRoute,
+  protectedMonitorRoute: protectedMonitorRoute,
+  protectedOverviewRoute: protectedOverviewRoute,
+  protectedRisingChannelsRoute: protectedRisingChannelsRoute,
+  protectedSavedRoute: protectedSavedRoute,
+  protectedViralShortsRoute: protectedViralShortsRoute,
 }
 
 const protectedRouteRouteWithChildren = protectedRouteRoute._addFileChildren(
