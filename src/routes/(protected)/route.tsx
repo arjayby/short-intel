@@ -23,7 +23,7 @@ export const Route = createFileRoute("/(protected)")({
 	},
 });
 
-export default function RouteComponent() {
+function RouteComponent() {
 	return (
 		<SidebarProvider>
 			<AppSidebar />
