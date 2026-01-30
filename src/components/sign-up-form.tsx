@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { authClient } from "@/lib/auth-client";
-import { cn, getRandomToast } from "@/lib/utils";
+import { cn, getAuthToastMessage } from "@/lib/utils";
 
 const formSchema = z.object({
 	email: z.email().min(1, "Email is required"),
@@ -46,14 +46,12 @@ export function SignUpForm({
 				},
 				{
 					onSuccess: () => {
-						const { title, description } = getRandomToast("signUp");
-						toast.success(title, { description });
+						const { title } = getAuthToastMessage("signUp");
+						toast.success(title);
 						navigate({ to: search.redirect || "/dashboard" });
 					},
 					onError: ({ error }) => {
-						toast.error("Sign up failed", {
-							description: error.message,
-						});
+						toast.error(error.message);
 					},
 				},
 			);
