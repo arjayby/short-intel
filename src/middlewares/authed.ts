@@ -2,6 +2,7 @@ import { redirect } from "@tanstack/react-router";
 import { createMiddleware } from "@tanstack/react-start";
 import { getRequestHeaders } from "@tanstack/react-start/server";
 import { auth } from "@/lib/auth";
+import { DEFAULT_AUTH_REDIRECT } from "@/lib/const";
 
 /**
  * Middleware to check if the user is authenticated.
@@ -19,7 +20,7 @@ export const authedMiddleware = createMiddleware().server(
 
 		if (session) {
 			throw redirect({
-				to: search.searchParams.get("redirect") || "/dashboard",
+				to: search.searchParams.get("redirect") || DEFAULT_AUTH_REDIRECT,
 			});
 		}
 

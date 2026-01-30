@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { authClient } from "@/lib/auth-client";
+import { DEFAULT_AUTH_REDIRECT } from "@/lib/const";
 import { cn, getAuthToastMessage } from "@/lib/utils";
 
 const formSchema = z.object({
@@ -48,7 +49,7 @@ export function SignUpForm({
 					onSuccess: () => {
 						const { title } = getAuthToastMessage("signUp");
 						toast.success(title);
-						navigate({ to: search.redirect || "/dashboard" });
+						navigate({ to: search.redirect || DEFAULT_AUTH_REDIRECT });
 					},
 					onError: ({ error }) => {
 						toast.error(error.message);
@@ -62,7 +63,7 @@ export function SignUpForm({
 		setIsSigningUpToGoogle(true);
 		await authClient.signIn.social({
 			provider: "google",
-			callbackURL: search.redirect || "/dashboard",
+			callbackURL: search.redirect || DEFAULT_AUTH_REDIRECT,
 		});
 		setIsSigningUpToGoogle(false);
 	}
